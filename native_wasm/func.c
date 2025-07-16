@@ -2,19 +2,18 @@
 #include <stdio.h>
 
 #define WASM_EXPORT(name) __attribute__((used)) __attribute__((export_name(name)))
+
 typedef void (*TFunc)(uint32_t);
 
 void print_num(uint32_t x) {
     printf("you gave me = %d\n", x);
 }
 
-// Exported wrapper for linking/exporting function
 WASM_EXPORT("print_num")
 void print_num_export(uint32_t x) {
     print_num(x);
 }
 
-// Set up function table
 WASM_EXPORT("setup_table")
 void setup_table() {
     if (__builtin_wasm_table_size(0) == 0) {
@@ -24,7 +23,6 @@ void setup_table() {
     }
 }
 
-// Return the index 0 where function was stored
 WASM_EXPORT("addr")
 uint32_t addr() {
     return 0;
