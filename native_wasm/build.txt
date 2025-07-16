@@ -1,0 +1,5 @@
+~/webassembly/wasi-sdk-21.0/bin/clang \
+  --target=wasm32-wasi -O3 -nostdlib -Wl,--no-entry \
+  -Wl,--export=print_num -Wl,--export=addr -Wl,--export=setup_table \
+  -Wl,--export-table -Wl,--growable-table \
+  -o func1.wasm func1.c
